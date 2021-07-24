@@ -26,7 +26,7 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
       <div class="mb-3">
         <span class="h2"><b>Hello,</b> {{user.name}}</span>
-        <span class="h4 float-right">Active Balance: {{currentBalance | currency:"Rp. "}}</span>
+        <span class="h4 float-right">Active Balance: {{user.currentBalance || 0 | currency:"Rp. "}}</span>
       </div>
       <hr>
       <h4>Balance Topup History:</h4>

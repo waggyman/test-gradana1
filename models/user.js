@@ -2,6 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 
+const TopUpHistories = new Schema({
+    date: Date,
+    value: String,
+    historyType: {
+        type: String,
+        enum: ["INCOME", "OUTCOME"]
+    }
+})
+
 const UserSchema = new Schema({
     name: {
         type: String
@@ -16,7 +25,8 @@ const UserSchema = new Schema({
         unique: true,
         required: true
     },
-    password: String
+    password: String,
+    histories: [TopUpHistories]
 });
 
 UserSchema.pre("save", function (next) {

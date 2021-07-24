@@ -2,6 +2,16 @@ const { body, validationResult } = require('express-validator')
 const UserModel = require('../models/user');
 
 module.exports = {
+    refresh: async (req, res, next) => {
+        try {
+            const reqUser = JSON.parse(req.headers['x-userinfo']);
+            const user = await UserModel.findById(reqUser._id);
+
+            res.json(user.toJSON());   
+        } catch (error) {
+            return next(error);
+        }
+    },
     store: async (req, res, next) => {
         try {
             const errors = validationResult(req);
