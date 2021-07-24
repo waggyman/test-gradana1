@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  div(ng-controller="loginController")
+  label Name: &nbsp;
+      input(type="text" ng-model="yourName" placeholder="Enter a name here")
+      h1 Hello {{yourName}}!
