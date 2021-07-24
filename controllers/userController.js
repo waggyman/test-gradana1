@@ -31,6 +31,11 @@ module.exports = {
             const user = await UserModel.create(payload)
             res.json(user.toJSON())
         } catch (err) {
+            if (err.code == 11000) {
+                const invalids = Object.keys(err.keyPattern);
+                return res.status(400).json({ errors: [ {param: invalids[0], msg: `${invalids[0]} already in use!`} ]})
+            }
+
             return next(err)
         }
     },
